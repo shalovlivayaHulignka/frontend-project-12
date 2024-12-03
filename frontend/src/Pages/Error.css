@@ -1,0 +1,16 @@
+.text-container {
+    text-align: center;
+}
+
+.image-svg {
+    width: 25%;
+}
+
+.text-container h1 {
+    font-size: 20px;
+    color: rgba(33, 37, 41, 0.75);
+}
+
+.text-container p {
+    font-size: 16px;
+}

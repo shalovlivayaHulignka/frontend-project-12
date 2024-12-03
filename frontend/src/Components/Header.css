@@ -1,0 +1,19 @@
+nav {
+    background-color: #fff;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .075);
+}
+nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    max-width: 80%;
+    margin: auto;
+}
+
+.navbar-brand {
+    padding: 0.5rem 0;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    color: inherit;
+}

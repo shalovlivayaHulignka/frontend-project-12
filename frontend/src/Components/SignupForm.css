@@ -1,0 +1,44 @@
+.form-caption {
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid rgb(222, 226, 230);
+    box-sizing: border-box;
+    color: #242424;
+    font-size: 16px;
+    outline: none;
+}
+
+.form-input:focus,
+.form-input:focus-visible {
+    border-color: rgb(13, 110, 253);
+    box-shadow: 0 0 5px 1px rgb(13, 110, 253);
+}
+
+.form-button {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 12px;
+    border: 1px solid rgb(13, 110, 253);
+    background-color: #fff;
+    color: rgb(13, 110, 253);
+    border-radius: 6px;
+}
+
+.form-button:hover {
+    background-color: rgb(13, 110, 253);
+    color: #fff;
+}
