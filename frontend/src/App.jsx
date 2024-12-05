@@ -12,7 +12,7 @@ const App = ()  => {
   return (
     <div className="d-flex flex-column h-100">
       <BrowserRouter>
-        <Navigation>
+        <Navigation />
           <AuthProvider>
             <Routes>
               <Route path={routes.mainPagePath()} element={<HomePage />} />
@@ -21,7 +21,6 @@ const App = ()  => {
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </AuthProvider>
-        </Navigation>
       </BrowserRouter>
     </div>
   );
