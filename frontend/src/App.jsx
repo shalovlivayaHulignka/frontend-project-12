@@ -4,18 +4,21 @@ import { HomePage } from './components/Page/HomePage.jsx';
 import { LoginPage } from './components/Page/LoginPage.jsx';
 import { SignUpPage } from './components/Page/SignUpPage.jsx';
 import { NotFoundPage } from './components/Page/NotFoundPage.jsx';
+import AuthProvider from "./auth/AuthProvider.jsx";
 
 console.log()
 
 const App = ()  => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path={routes.mainPagePath()} element={<HomePage />} />
-        <Route path={routes.loginPagePath()} element={<LoginPage />} />
-        <Route path={routes.signUpPagePath()} element={<SignUpPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path={routes.mainPagePath()} element={<HomePage />} />
+          <Route path={routes.loginPagePath()} element={<LoginPage />} />
+          <Route path={routes.signUpPagePath()} element={<SignUpPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
