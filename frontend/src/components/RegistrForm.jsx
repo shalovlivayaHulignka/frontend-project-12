@@ -1,15 +1,41 @@
-import { useFormik } from "formik";
-import { useRef, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { useFormik } from 'formik';
+import axios from 'axios';
+import { useRef, useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import routes from '../utils/routes';
+import useAuth from '../hooks/useAuth';
+
 
 const RegistrForm = () => {
+  const auth = useAuth();
+  const [authFailed, setAuthFailed] = useState(false);
+  const navigate = useNavigate();
   const inputRef = useRef(null);
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
+
   const formik = useFormik({
     initialValues: { username: "", password: "", confirmPassword: "" },
-    onSubmit: () => console.log("test"),
+    onSubmit: async (values) => {
+      setAuthFailed(false);
+
+      try {
+        const res = await axios.post("/api/v1/signup", values);
+        auth.logIn(res.data.token, values.username);
+        navigate(routes.mainPagePath());
+      } catch (err) {
+        formik.setSubmitting(false);
+        if (err.isAxiosError && err.response.status === 401) {
+          setAuthFailed(true);
+          inputRef.current.select();
+          return;
+        }
+        throw err;
+      }
+    },
   });
 
   return (
@@ -24,6 +50,7 @@ const RegistrForm = () => {
             placeholder="Ваш ник"
             id="username"
             ref={inputRef}
+            isInvalid={authFailed}
             onChange={formik.handleChange}
             value={formik.values.username}
           />
@@ -37,6 +64,7 @@ const RegistrForm = () => {
             placeholder="Ваш пароль"
             type="password"
             id="password"
+            isInvalid={authFailed}
             onChange={formik.handleChange}
             value={formik.values.password}
           />
@@ -52,6 +80,7 @@ const RegistrForm = () => {
             id="confirmPassword"
             onChange={formik.handleChange}
             value={formik.values.confirmPassword}
+            isInvalid={authFailed}
           />
           <Form.Label htmlFor="password">Подтвердите пароль</Form.Label>
 

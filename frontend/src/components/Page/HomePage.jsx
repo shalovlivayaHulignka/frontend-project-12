@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ContainerChat from '../Chat/ContainerChat.jsx';
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -11,13 +12,7 @@ export const HomePage = () => {
     }
   }, );
   return (
-    <div className="container-fluid h-100">
-      <div className="row justify-content-center align-items-center h-100">
-        <div className="col-12 col-md-8 col-xxl-6">
-          <div className="card shadow-sm">Hello!</div>
-        </div>
-      </div>
-    </div>
+    <ContainerChat />
   );
 };
 

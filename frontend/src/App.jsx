@@ -1,19 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import routes from "./utils/routes.jsx";
-import { HomePage } from './components/Page/HomePage.jsx';
-import { LoginPage } from './components/Page/LoginPage.jsx';
-import { SignUpPage } from './components/Page/SignUpPage.jsx';
-import { NotFoundPage } from './components/Page/NotFoundPage.jsx';
-import AuthProvider from "./auth/AuthProvider.jsx";
-import Navigation from "./components/Navigation.jsx";
-import store from "./store/store.jsx";
+import routes from './utils/routes';
+import { HomePage } from './components/Page/HomePage';
+import { LoginPage } from './components/Page/LoginPage';
+import { SignUpPage } from './components/Page/SignUpPage';
+import { NotFoundPage } from './components/Page/NotFoundPage';
+import AuthProvider from './auth/AuthProvider';
+import Navigation from './components/Navigation';
+import store from './store/store';
+
+
+import { ToastContainer, Flip} from "react-toastify";
 
 const App = ()  => {
   return (
     <div className="d-flex flex-column h-100">
       <BrowserRouter>
+        <ToastContainer
+          position='top-right'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          pauseOnHover
+          draggable
+          theme='light'
+          transition={Flip}
+        />
         <Provider store={store}>
           <AuthProvider>
             <Navigation />

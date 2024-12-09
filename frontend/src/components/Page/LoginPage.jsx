@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import image from '../../assets/login.jpg';
 import routes from '../../utils/routes';
-import LoginForm from "../LoginForm.jsx";
+import LoginForm from '../LoginForm.jsx';
 
 export const LoginPage = () => {
   return (

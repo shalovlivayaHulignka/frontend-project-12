@@ -1,5 +1,5 @@
 import AuthContext from "./AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -14,6 +14,13 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem('username');
       setLoggedIn(false);
     };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
   
     return (
       <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
