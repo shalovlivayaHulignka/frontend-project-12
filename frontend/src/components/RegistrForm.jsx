@@ -9,7 +9,7 @@ const RegistrForm = () => {
   }, []);
   const formik = useFormik({
     initialValues: { username: "", password: "", confirmPassword: "" },
-    onSubmit: () => console.log("blabla"),
+    onSubmit: () => console.log("test"),
   });
 
   return (

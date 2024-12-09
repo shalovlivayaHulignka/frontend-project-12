@@ -1,11 +1,10 @@
-import {useRef, useEffect, useState, useContext, createContext} from "react";
+import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useNavigate } from 'react-router-dom';
 import routes from "../utils/routes.jsx";
-
-const useAuth = () => useContext(createContext({}));
+import useAuth from "../hooks/useAuth.jsx";
 
 const LoginForm = () => {
   const auth = useAuth();
