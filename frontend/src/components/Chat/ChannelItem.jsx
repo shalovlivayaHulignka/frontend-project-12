@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setActiveChannel,
   activeChannelSelector,
-} from '../../store/activeChannelSlice';
+} from '../../store/activeChannelSlice.jsx';
 
 const ChannelItem = ({ channel }) => {
   const activeChannel = useSelector(activeChannelSelector);

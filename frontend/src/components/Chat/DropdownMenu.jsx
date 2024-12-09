@@ -1,9 +1,9 @@
-import { activeChannelSelector } from '../../store/activeChannelSlice';
+import { activeChannelSelector } from '../../store/activeChannelSlice.jsx';
 import { useSelector } from 'react-redux';
 import ChannelItem from './ChannelItem';
 import { Dropdown, ButtonGroup } from 'react-bootstrap';
 
-const DropdownMenu = ({ renderModal, closeModal, openModal, modalType, channel }) => {
+const DropdownMenu = ({ renderModal, closeModal, openModal, modalType, channel, t }) => {
   const activeChannel = useSelector(activeChannelSelector);
 
   return (
@@ -14,14 +14,14 @@ const DropdownMenu = ({ renderModal, closeModal, openModal, modalType, channel }
         variant={activeChannel.id === channel.id ? "secondary" : ""}
         id="channelDropdown"
       >
-        <span className="visually-hidden">Управление каналом</span>
+        <span className="visually-hidden">{t("channel.description")}</span>
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => openModal("removing")}>
-          Удалить
+          {t("channel.deleteButton")}
         </Dropdown.Item>
         <Dropdown.Item onClick={() => openModal("renaming")}>
-          Переименовать
+          {t("channel.renameButton")}
         </Dropdown.Item>
         {renderModal(modalType, closeModal, channel)}
       </Dropdown.Menu>

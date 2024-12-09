@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import image from '../../assets/login.jpg';
 import routes from '../../utils/routes';
 import LoginForm from '../LoginForm.jsx';
 
 export const LoginPage = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="container-fluid h-100">
       <div className="row justify-content-center align-items-center h-100">
@@ -17,8 +20,10 @@ export const LoginPage = () => {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>Нет аккаунта? </span>
-                <Link to={routes.signUpPagePath()}>Регистрация</Link>
+                <span>{t("loginPage.question")}</span>
+                <Link to={routes.signUpPagePath()}>
+                  {t("loginPage.registration")}
+                </Link>
               </div>
             </div>
           </div>

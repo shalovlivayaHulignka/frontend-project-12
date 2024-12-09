@@ -8,7 +8,23 @@ const addSocketListener = async ( socket, event, cacheDataLoaded, updateCachedDa
     await cacheDataLoaded;
     const handleEvent = (payload) => {
       updateCachedData((draft) => {
-        draft.push(payload);
+        switch (event) {
+          case "newChannel":
+          case "newMessage":
+            draft.push(payload);
+            break;
+          case "renameChannel": {
+            const channel = draft.find((c) => c.id === payload.id);
+            if (channel) {
+              channel.name = payload.name;
+            }
+            break;
+          }
+          case "removeChannel":
+            return draft.filter((c) => c.id !== payload.id);
+          default:
+            break;
+        }
       });
     };
     socket.on(event, handleEvent);
@@ -45,11 +61,25 @@ export const chatApi = createApi({
       query: () => "channels",
       onCacheEntryAdded: async (
         _,
-        { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
+        {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
       ) => {
         addSocketListener(
           socket,
           "newChannel",
+          cacheDataLoaded,
+          updateCachedData,
+          cacheEntryRemoved
+        );
+        addSocketListener(
+          socket,
+          "renameChannel",
+          cacheDataLoaded,
+          updateCachedData,
+          cacheEntryRemoved
+        );
+        addSocketListener(
+          socket,
+          "removeChannel",
           cacheDataLoaded,
           updateCachedData,
           cacheEntryRemoved
@@ -68,16 +98,17 @@ export const chatApi = createApi({
     }),
 
     renameChannel: builder.mutation({
-      query: ({ id, name }) => ({
+      query: ({id, name}) => ({
         url: `channels/${id}`,
         method: "PATCH",
-        body: { name },
+        body: {name},
       }),
+
       invalidatesTags: ["Channel"],
     }),
 
     deleteChannel: builder.mutation({
-      query: ({ id }) => ({
+      query: ({id}) => ({
         url: `channels/${id}`,
         method: "DELETE",
       }),
@@ -88,7 +119,7 @@ export const chatApi = createApi({
       query: () => "messages",
       onCacheEntryAdded: async (
         _,
-        { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
+        {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
       ) => {
         addSocketListener(
           socket,

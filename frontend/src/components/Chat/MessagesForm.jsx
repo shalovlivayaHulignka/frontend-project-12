@@ -4,11 +4,10 @@ import { useFormik } from 'formik';
 import MessageInputButton from './MessageInputButton';
 import EmojiContainer from './EmojiContainer';
 
-const MessagesForm = ({ channelId, addMessage, username }) => {
+const MessagesForm = ({ channelId, addMessage, username, t }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const inputRef = useRef(null);
-
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -17,10 +16,9 @@ const MessagesForm = ({ channelId, addMessage, username }) => {
     initialValues: {
       body: "",
     },
-
-    onSubmit: async (body, {setFieldValue}) => {
+    onSubmit: async (body, { setFieldValue }) => {
       try {
-        const newMessage = {body, channelId, username};
+        const newMessage = { body, channelId, username };
         await addMessage(newMessage);
         setFieldValue("body", "");
       } catch (err) {
@@ -53,12 +51,12 @@ const MessagesForm = ({ channelId, addMessage, username }) => {
           :)
           <span className="visually-hidden">Добавить смайл</span>
         </button>
-        <Form.Label htmlFor="body"/>
+        <Form.Label htmlFor="body" />
         <Form.Control
           id="body"
           name="body"
-          aria-label="Новое сообщение"
-          placeholder="Введите сообщение..."
+          aria-label={t("messageInput.label")}
+          placeholder={t("messageInput.placeholder")}
           className="border-0 p-0 ps-2 form-control"
           value={formik.values.body}
           onChange={formik.handleChange}
@@ -66,12 +64,12 @@ const MessagesForm = ({ channelId, addMessage, username }) => {
           ref={inputRef}
         />
         <button type="submit" disabled="" className="btn btn-group-vertical">
-          <MessageInputButton/>
-          <span className="visually-hidden">Отправить</span>
+          <MessageInputButton />
+          <span className="visually-hidden">{t("messageInput.submitButton")}</span>
         </button>
       </div>
       {showEmojiPicker && (
-        <EmojiContainer handleOnEmojiClick={handleOnEmojiClick}/>
+        <EmojiContainer handleOnEmojiClick={handleOnEmojiClick} />
       )}
     </Form>
   );
