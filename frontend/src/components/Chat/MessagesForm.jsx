@@ -1,16 +1,14 @@
 import { Form } from 'react-bootstrap';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import MessageInputButton from './MessageInputButton';
 
 const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-
   const inputRef = useRef(null);
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
-
   const formik = useFormik({
     initialValues: {
       body: "",
@@ -26,15 +24,6 @@ const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
     },
   });
 
-  const toggleEmojiPicker = () => {
-    setShowEmojiPicker(!showEmojiPicker);
-  };
-
-  const handleOnEmojiClick = (emojiObject) => {
-    formik.setFieldValue("body", formik.values.body + emojiObject.emoji);
-    setShowEmojiPicker(false);
-  };
-
   return (
     <Form
       onSubmit={formik.handleSubmit}
@@ -42,16 +31,9 @@ const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
       className="py-1 border rounded-2"
     >
       <div className="input-group has-validation">
-        <button
-          type="button"
-          onClick={toggleEmojiPicker}
-          className="btn"
-        >
-          :)
-          <span className="visually-hidden">Добавить смайл</span>
-        </button>
         <Form.Label htmlFor="body" />
         <Form.Control
+          required
           id="body"
           name="body"
           aria-label={t("messageInput.label")}
@@ -59,7 +41,7 @@ const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
           className="border-0 p-0 ps-2 form-control"
           value={formik.values.body}
           onChange={formik.handleChange}
-          wfd-id="id4"
+          wfd-id="id0"
           ref={inputRef}
         />
         <button type="submit" disabled={isLoading} className="btn btn-group-vertical">
@@ -67,9 +49,6 @@ const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
           <span className="visually-hidden">{t("messageInput.submitButton")}</span>
         </button>
       </div>
-      {showEmojiPicker && (
-        <EmojiContainer handleOnEmojiClick={handleOnEmojiClick} />
-      )}
     </Form>
   );
 };

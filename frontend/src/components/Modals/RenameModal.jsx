@@ -1,5 +1,5 @@
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -8,12 +8,13 @@ import { channelNamesShema } from '../../utils/validate.jsx';
 import { useGetChannelsQuery, useRenameChannelMutation } from '../../store/chatApi.jsx';
 import { setActiveChannel } from '../../store/activeChannelSlice';
 
-const RenameModal = ({ closeModal, channel }) => {
+const RenameModal = ({ closeModal }) => {
+  const channel = useSelector((state) => state.modal.channel);
   const { data: channels } = useGetChannelsQuery();
-  const channelNames = channels?.map((channel) => channel.name) || [];
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const channelNames = channels?.map((item) => item.name) || [];
   const [renameChannel] = useRenameChannelMutation();
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const inputRef = useRef(null);
 
   const formik = useFormik({
@@ -25,11 +26,12 @@ const RenameModal = ({ closeModal, channel }) => {
       const updatedChannel = {
         id: channel.id,
         name,
+        removable: true,
       };
       try {
         await renameChannel(updatedChannel);
         dispatch(setActiveChannel(updatedChannel));
-        toast.success(t("toastify.success.channel.rename"))
+        toast.success(t("toastify.success.channel.rename"));
         closeModal();
       } catch (err) {
         console.log(err);
@@ -38,9 +40,8 @@ const RenameModal = ({ closeModal, channel }) => {
   });
 
   useEffect(() => {
-    inputRef.current.focus();
-    inputRef.current.select();
-  }, []);
+    setTimeout(() => inputRef.current.select());
+  }, [channel]);
 
   return (
     <Modal show="true" onHide={closeModal} centered>
@@ -61,7 +62,7 @@ const RenameModal = ({ closeModal, channel }) => {
               value={formik.values.name}
             />
             <Form.Label htmlFor="renameChannel" className="visually-hidden">
-              {t('modal.label')}
+              {t("modal.label")}
             </Form.Label>
             {formik.touched.name && formik.errors.name && (
               <Form.Control.Feedback type="invalid">

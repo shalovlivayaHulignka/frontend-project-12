@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import ChannelItem from './ChannelItem';
 import { Dropdown, ButtonGroup } from 'react-bootstrap';
 
-const DropdownMenu = ({ renderModal, closeModal, openModal, modalType, channel, t }) => {
+const DropdownMenu = ({ openModal, channel, t }) => {
   const activeChannel = useSelector(activeChannelSelector);
 
   return (
@@ -20,10 +20,9 @@ const DropdownMenu = ({ renderModal, closeModal, openModal, modalType, channel, 
         <Dropdown.Item onClick={() => openModal("removing")}>
           {t("channel.deleteButton")}
         </Dropdown.Item>
-        <Dropdown.Item onClick={() => openModal("renaming")}>
+        <Dropdown.Item onClick={() => openModal("renaming", channel)}>
           {t("channel.renameButton")}
         </Dropdown.Item>
-        {renderModal(modalType, closeModal, channel)}
       </Dropdown.Menu>
     </Dropdown>
   );

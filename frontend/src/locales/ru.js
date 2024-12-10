@@ -38,6 +38,7 @@ const ru = {
       },
       chatPage: {
         title: "Каналы",
+        addButton: "+",
       },
       messageInput: {
         label: "Новое сообщение",

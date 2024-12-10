@@ -1,51 +1,33 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import ChannelItem from './ChannelItem';
-import { useGetChannelsQuery } from '../../store/chatApi.jsx';
+import { useGetChannelsQuery } from '../../store/chatApi';
 import Loading from '../Loading';
 import DropdownMenu from './DropdownMenu';
-import { openModal, closeModal } from '../../store/modalSlice.jsx';
-import getModal from '../Modals/index.js';
-
-const Title = ({ renderModal, closeModal, openModal, modalType, t }) => {
-  return (
-    <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-      <b>{t("chatPage.title")}</b>
-      <button
-        type="button"
-        className="p-0 text-primary btn btn-group-vertical"
-        onClick={() => openModal("adding")}
-      >
-        +
-      </button>
-      {renderModal(modalType, closeModal)}
-    </div>
-  );
-};
+import { openModal, closeModal } from '../../store/modalSlice';
+import getModal from '../Modals';
+import ChannelTitle from './ChannelTitle';
 
 const ChannelsList = () => {
   const { t } = useTranslation();
   const modalType = useSelector((state) => state.modal.modalType);
   const dispatch = useDispatch();
-  const renderModal = (modalType, closeModal, channel) => {
-    if (!modalType) {
+  const renderModal = (type, close, channel) => {
+    if (!type) {
       return null;
     }
 
-    const Component = getModal(modalType);
-    return <Component closeModal={closeModal} channel={channel} />;
+    const Component = getModal(type);
+    return <Component closeModal={close} channel={channel} />;
   };
   const { data: channels, isLoading } = useGetChannelsQuery();
-  const handleOpenModal = (type) => dispatch(openModal(type));
+  const handleOpenModal = (type, channel) => dispatch(openModal({ type, channel }));
   const handleCloseModal = () => dispatch(closeModal());
   const isEditableChannel = (channel) => channel.removable;
 
   return (
     <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
-      <Title
-        renderModal={renderModal}
-        modalType={modalType}
-        closeModal={handleCloseModal}
+      <ChannelTitle
         openModal={handleOpenModal}
         t={t}
       />
@@ -58,9 +40,6 @@ const ChannelsList = () => {
           <li className="nav-item w-100" key={channel.id}>
             {isEditableChannel(channel) ? (
               <DropdownMenu
-                renderModal={renderModal}
-                modalType={modalType}
-                closeModal={handleCloseModal}
                 openModal={handleOpenModal}
                 channel={channel}
                 t={t}
@@ -71,6 +50,7 @@ const ChannelsList = () => {
           </li>
         ))}
       </ul>
+      {renderModal(modalType, handleCloseModal)}
     </div>
   );
 };
