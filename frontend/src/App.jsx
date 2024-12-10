@@ -7,7 +7,7 @@ import { HomePage } from './components/Page/HomePage';
 import { LoginPage } from './components/Page/LoginPage';
 import { SignUpPage } from './components/Page/SignUpPage';
 import { NotFoundPage } from './components/Page/NotFoundPage';
-import AuthProvider from './auth/AuthProvider';
+import AuthProvider from './authorization/AuthProvider';
 import Navigation from './components/Navigation';
 import store from './store/store';
 

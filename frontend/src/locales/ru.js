@@ -13,7 +13,7 @@ const ru = {
       username: "Ваш ник",
       password: "Ваш пароль",
       submitButton: "Войти",
-      feedBack: "Неправильные имя или пароль",
+      feedback: "Неправильные имя или пароль",
     },
     signupForm: {
         title: "Регистрация",

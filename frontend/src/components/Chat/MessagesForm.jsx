@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import MessageInputButton from './MessageInputButton';
 import EmojiContainer from './EmojiContainer';
 
-const MessagesForm = ({ channelId, addMessage, username, t }) => {
+const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const inputRef = useRef(null);
@@ -63,7 +63,7 @@ const MessagesForm = ({ channelId, addMessage, username, t }) => {
           wfd-id="id4"
           ref={inputRef}
         />
-        <button type="submit" disabled="" className="btn btn-group-vertical">
+        <button type="submit" disabled={isLoading} className="btn btn-group-vertical">
           <MessageInputButton />
           <span className="visually-hidden">{t("messageInput.submitButton")}</span>
         </button>
