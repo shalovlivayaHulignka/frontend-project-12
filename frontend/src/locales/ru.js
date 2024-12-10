@@ -5,15 +5,15 @@ const ru = {
       title: "Hexlet Chat",
     },
     loginPage : {
-    question: "Нет аккаунта?",
+    question: "Нет аккаунта? ",
     registration: "Регистрация",
     },
     loginForm: {
       title: "Войти",
       username: "Ваш ник",
-      password: "Ваш пароль",
+      password: "Пароль",
       submitButton: "Войти",
-      feedback: "Неправильные имя или пароль",
+      feedback: "Неверные имя пользователя или пароль",
     },
     signupForm: {
         title: "Регистрация",
@@ -74,7 +74,7 @@ const ru = {
         rename: {
           title: "Переименовать канал",
           cancelButton: "Отменить",
-          submitButton: "Отправить",
+          submitButton: "Переименовать",
         },
       },
       toastify: {

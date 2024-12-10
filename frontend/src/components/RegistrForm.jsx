@@ -97,7 +97,7 @@ const RegistrationForm = () => {
             }
             value={formik.values.confirmPassword}
           />
-          <Form.Label htmlFor="password">{t("signupForm.confirmPassword")}</Form.Label>
+          <Form.Label htmlFor="confirmPassword">{t('signupForm.confirmPassword')}</Form.Label>
           <Form.Control.Feedback type="invalid" tooltip>
             {formik.errors.confirmPassword}
           </Form.Control.Feedback>

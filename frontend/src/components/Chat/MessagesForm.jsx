@@ -2,7 +2,6 @@ import { Form } from 'react-bootstrap';
 import { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import MessageInputButton from './MessageInputButton';
-import EmojiContainer from './EmojiContainer';
 
 const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
