@@ -34,15 +34,11 @@ const ChannelsList = () => {
   const channelsListRef = useRef(null);
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      if (channelsListRef.current) {
-        if (activeChannelId === defaultChannel.id) {
-          channelsListRef.current.scrollTop = 0;
-        } else {
-          channelsListRef.current.scrollTop = channelsListRef.current.scrollHeight;
-        }
-      }
-    });
+    if (activeChannelId === defaultChannel.id) {
+      channelsListRef.current.scrollTop = 0;
+    } else {
+      channelsListRef.current.scrollTop = channelsListRef.current.scrollHeight;
+    }
   }, [channels, activeChannelId]);
 
   return (

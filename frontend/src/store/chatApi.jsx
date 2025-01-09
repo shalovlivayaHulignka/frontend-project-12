@@ -1,39 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { io } from 'socket.io-client';
+import addSocketListener from './helperApi';
 
 const socket = io();
-
-const addSocketListener = async ( socket, event, cacheDataLoaded, updateCachedData, cacheEntryRemoved ) => {
-  try {
-    await cacheDataLoaded;
-    const handleEvent = (payload) => {
-      updateCachedData((draft) => {
-        switch (event) {
-          case "newChannel":
-          case "newMessage":
-            draft.push(payload);
-            break;
-          case "renameChannel": {
-            const channel = draft.find((c) => c.id === payload.id);
-            if (channel) {
-              channel.name = payload.name;
-            }
-            break;
-          }
-          case "removeChannel":
-            return draft.filter((c) => c.id !== payload.id);
-          default:
-            break;
-        }
-      });
-    };
-    socket.on(event, handleEvent);
-  } catch (e) {
-    console.error(e);
-  }
-  await cacheEntryRemoved;
-  socket.off(event);
-};
 
 export const chatApi = createApi({
   reducerPath: "chatApi",
@@ -56,82 +25,76 @@ export const chatApi = createApi({
         body: newUser,
       }),
     }),
-
     getChannels: builder.query({
       query: () => "channels",
       onCacheEntryAdded: async (
         _,
-        {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+        { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) => {
         addSocketListener(
           socket,
           "newChannel",
           cacheDataLoaded,
           updateCachedData,
-          cacheEntryRemoved
+          cacheEntryRemoved,
         );
         addSocketListener(
           socket,
           "renameChannel",
           cacheDataLoaded,
           updateCachedData,
-          cacheEntryRemoved
+          cacheEntryRemoved,
         );
         addSocketListener(
           socket,
           "removeChannel",
           cacheDataLoaded,
           updateCachedData,
-          cacheEntryRemoved
+          cacheEntryRemoved,
         );
       },
-      providesTags: ["Channel", "Message"],
+      providesTags: ["Channel"],
     }),
-
     addChannel: builder.mutation({
-      query: (newChannel) => ({
+      query: (channelName) => ({
         url: "channels",
         method: "POST",
-        body: newChannel,
+        body: channelName,
       }),
       invalidatesTags: ["Channel", "Message"],
     }),
-
     renameChannel: builder.mutation({
-      query: ({id, name}) => ({
+      query: ({ id, name }) => ({
         url: `channels/${id}`,
         method: "PATCH",
-        body: {name},
+        body: { name },
       }),
 
       invalidatesTags: ["Channel", "Message"],
     }),
-
     deleteChannel: builder.mutation({
-      query: ({id}) => ({
+      query: ({ id }) => ({
         url: `channels/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Channel", "Message"],
     }),
-
     getMessages: builder.query({
       query: () => "messages",
       onCacheEntryAdded: async (
         _,
-        {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+        { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) => {
         addSocketListener(
           socket,
           "newMessage",
           cacheDataLoaded,
           updateCachedData,
-          cacheEntryRemoved
+          cacheEntryRemoved,
         );
       },
-      providesTags: ["Channel", "Message"],
+      providesTags: ["Message", "Channel"],
     }),
-
     addMessage: builder.mutation({
       query: (newMessage) => ({
         url: "messages",
