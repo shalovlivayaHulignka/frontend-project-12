@@ -1,12 +1,11 @@
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
 import { channelNamesShema } from '../../utils/validate.jsx';
 import { useGetChannelsQuery, useRenameChannelMutation } from '../../store/chatApi.jsx';
-import { setActiveChannel } from '../../store/activeChannelSlice';
 
 const RenameModal = ({ closeModal }) => {
   const channel = useSelector((state) => state.modal.channel);
@@ -14,12 +13,11 @@ const RenameModal = ({ closeModal }) => {
   const channelNames = channels?.map((item) => item.name) || [];
   const [renameChannel] = useRenameChannelMutation();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const inputRef = useRef(null);
 
   const formik = useFormik({
     initialValues: {
-      name: channel?.name,
+      name: channel?.name.trim(),
     },
     validationSchema: channelNamesShema(channelNames, t),
     onSubmit: async ({ name }) => {
@@ -30,7 +28,6 @@ const RenameModal = ({ closeModal }) => {
       };
       try {
         await renameChannel(updatedChannel);
-        dispatch(setActiveChannel(updatedChannel));
         toast.success(t("toastify.success.channel.rename"));
         closeModal();
       } catch (err) {

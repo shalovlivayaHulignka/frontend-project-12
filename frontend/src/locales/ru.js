@@ -60,6 +60,7 @@ const ru = {
         validation: {
           notOneOf: "Должно быть уникальным",
           range: "От 3 до 20 символов",
+          required: "Обязательное поле",
         },
         add: {
           title: "Добавить канал",

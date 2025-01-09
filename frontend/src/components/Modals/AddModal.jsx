@@ -45,7 +45,6 @@ const AddModal = ({ closeModal }) => {
         <Modal.Body>
           <Form.Group>
             <Form.Control
-              required
               id="addChannel"
               name="name"
               ref={inputRef}
