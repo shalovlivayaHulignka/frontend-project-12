@@ -26,7 +26,7 @@ const RegistrationForm = () => {
     validationSchema: signUpShema(t),
     onSubmit: async (values) => {
       try {
-        const res = await axios.post("/api/v1/signup", values);
+        const res = await axios.post(routes.signUpApiPath(), values);
         auth.logIn(res.data.token, values.username);
         navigate(routes.mainPagePath());
         setIsError(false)
