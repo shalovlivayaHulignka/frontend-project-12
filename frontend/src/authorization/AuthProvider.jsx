@@ -2,7 +2,7 @@ import AuthContext from './AuthContext';
 import { useState, useEffect, useMemo } from 'react';
 
 const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('token'));
 
   const logIn = (token, username) => {
     localStorage.setItem("token", token);
