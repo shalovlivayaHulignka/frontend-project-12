@@ -1,19 +1,10 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import useAuth from "../../hooks/useAuth.jsx";
 import ContainerChat from '../Chat/ContainerChat.jsx';
+import LoginPage from './LoginPage.jsx';
 
 export const HomePage = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-    }
-  }, );
-  return (
-    <ContainerChat />
-  );
+  const { loggedIn } = useAuth();
+  return loggedIn ? <ContainerChat /> : <LoginPage />;
 };
 
 

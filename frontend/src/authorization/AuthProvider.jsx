@@ -1,5 +1,5 @@
 import AuthContext from './AuthContext';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,10 +22,20 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const authValue = useMemo(
+    () => ({
+      loggedIn,
+      logIn,
+      logOut,
+    }),
+    [loggedIn],
+  );
+
   return (
-    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
+    <AuthContext.Provider value={authValue}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 export default AuthProvider;

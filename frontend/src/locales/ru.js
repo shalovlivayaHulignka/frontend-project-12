@@ -1,5 +1,12 @@
 const ru = {
   translation: {
+    image: {
+      login: "регистрация",
+      signup: "авторизация",
+    },
+    loading: {
+      text: "Загрузка...",
+    },
     mainNavigation: {
       exitButton: "Выйти",
       title: "Hexlet Chat",

@@ -1,4 +1,5 @@
 import { Button, Form, Modal } from 'react-bootstrap';
+import filter from 'leo-profanity';
 import { toast } from 'react-toastify';
 import { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
@@ -22,7 +23,8 @@ const AddModal = ({ closeModal }) => {
     validationSchema: channelNamesShema(channelNames, t),
     onSubmit: async ({ name }) => {
       try {
-        const newChannel = await addChannel({ name });
+        const filteredName = filter.clean(name);
+        const newChannel = await addChannel({ name: filteredName });
         dispatch(setActiveChannel(newChannel.data));
         toast.success(t("toastify.success.channel.add"));
         closeModal();

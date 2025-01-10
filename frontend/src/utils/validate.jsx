@@ -6,7 +6,7 @@ export const channelNamesShema = (channelNames, t) => object({
     .min(3, t("modal.validation.range"))
     .max(20, t("modal.validation.range"))
     .notOneOf(channelNames, t("modal.validation.notOneOf"))
-    .required(t("modal.validation.required')),
+    .required(t("modal.validation.required")),
 });
 
 export const signUpShema = (t) => object().shape({

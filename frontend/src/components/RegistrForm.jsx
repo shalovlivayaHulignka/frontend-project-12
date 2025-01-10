@@ -48,7 +48,7 @@ const RegistrationForm = () => {
   return (
     <Form className="w-50" onSubmit={formik.handleSubmit}>
       <fieldset>
-        <h1 className="text-center mb-4">Регистрация</h1>
+        <h1 className="text-center mb-4">{t('signupForm.title')}</h1>
         <Form.Group className="form-floating mb-3">
           <Form.Control
             name="username"

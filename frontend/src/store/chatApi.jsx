@@ -61,7 +61,6 @@ export const chatApi = createApi({
         method: "POST",
         body: channelName,
       }),
-      invalidatesTags: ["Channel", "Message"],
     }),
     renameChannel: builder.mutation({
       query: ({ id, name }) => ({

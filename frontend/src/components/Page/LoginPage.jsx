@@ -4,7 +4,7 @@ import image from '../../assets/login.jpg';
 import routes from '../../utils/routes';
 import LoginForm from '../LoginForm.jsx';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -14,7 +14,7 @@ export const LoginPage = () => {
           <div className="card shadow-sm">
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src={image} className="rounded-circle" alt="login" width={200}/>
+                <img src={image} className="rounded-circle" alt={t("image.login")} width={200}/>
               </div>
              <LoginForm />
             </div>
@@ -32,3 +32,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export default LoginPage;
