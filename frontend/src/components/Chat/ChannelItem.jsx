@@ -8,8 +8,8 @@ const ChannelItem = ({ channel }) => {
   const { activeChannelId } = useLiveData(activeChannel);
   const dispatch = useDispatch();
   const classes = channel.id === activeChannelId
-    ? "w-100 rounded-0 text-truncate text-start btn btn-secondary"
-    : "w-100 rounded-0 text-truncate text-start btn";
+    ? "w-100 rounded-0 text-start text-truncate btn btn-secondary"
+    : "w-100 rounded-0 text-start text-truncate btn";
   const handleSetActiveChannel = (currentChannel) => {
     dispatch(setActiveChannel(currentChannel));
   };
