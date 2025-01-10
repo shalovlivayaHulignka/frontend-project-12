@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import routes from './utils/routes';
 import { HomePage } from './components/Page/HomePage';
-import { LoginPage } from './components/Page/LoginPage';
+import LoginPage from './components/Page/LoginPage';
 import { SignUpPage } from './components/Page/SignUpPage';
 import { NotFoundPage } from './components/Page/NotFoundPage';
 import AuthProvider from './authorization/AuthProvider';
