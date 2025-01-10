@@ -1,12 +1,12 @@
-import { useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import {useEffect, useRef} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
 import ChannelItem from './ChannelItem';
 import useLiveData from '../../hooks/useLiveData';
 import Loading from '../Loading';
 import DropdownMenu from './DropdownMenu';
-import { openModal, closeModal } from '../../store/modalSlice';
-import { activeChannelSelector } from "../../store/activeChannelSlice.jsx";
+import {openModal, closeModal} from '../../store/modalSlice';
+import {activeChannelSelector} from '../../store/activeChannelSlice.jsx';
 import getModal from '../Modals';
 import ChannelTitle from './ChannelTitle';
 import defaultChannel from '../../utils/defaultChannel.js';
@@ -17,17 +17,17 @@ const renderModal = (type, close, channel) => {
   }
 
   const Component = getModal(type);
-  return <Component closeModal={close} channel={channel} />;
+  return <Component closeModal={close} channel={channel}/>;
 };
 
 const ChannelsList = () => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const modalType = useSelector((state) => state.modal.modalType);
   const activeChannel = useSelector(activeChannelSelector);
-  const { activeChannelId, channels, isLoading } = useLiveData(activeChannel);
+  const {activeChannelId, channels, isLoading} = useLiveData(activeChannel);
   const dispatch = useDispatch();
 
-  const handleOpenModal = (type, channel) => dispatch(openModal({ type, channel }));
+  const handleOpenModal = (type, channel) => dispatch(openModal({type, channel}));
   const handleCloseModal = () => dispatch(closeModal());
   const isEditableChannel = (channel) => channel.removable;
   const channelsListRef = useRef(null);
@@ -51,7 +51,7 @@ const ChannelsList = () => {
         id="channels-box"
         className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block"
       >
-        {isLoading && <Loading t={t} />}
+        {isLoading && <Loading t={t}/>}
         {channels?.map((channel) => (
           <li className="nav-item w-100" key={channel.id}>
             {isEditableChannel(channel) ? (
@@ -61,7 +61,7 @@ const ChannelsList = () => {
                 t={t}
               />
             ) : (
-              <ChannelItem channel={channel} />
+              <ChannelItem channel={channel}/>
             )}
           </li>
         ))}

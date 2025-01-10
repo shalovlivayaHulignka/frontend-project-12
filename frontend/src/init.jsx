@@ -12,7 +12,7 @@ const init = () => {
   const i18n = i18next.createInstance();
   const options = {
     resources,
-    fallbackLng: "ru",
+    fallbackLng: 'ru',
     interpolation: {
       escapeValue: false,
     },
@@ -23,6 +23,7 @@ const init = () => {
     accessToken: process.env.REACT_APP_ROLLBAR_TOKEN,
     environment: 'production',
   };
+
   return (
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>

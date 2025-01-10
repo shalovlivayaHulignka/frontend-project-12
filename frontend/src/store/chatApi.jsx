@@ -5,14 +5,14 @@ import addSocketListener from './helperApi';
 const socket = io();
 
 export const chatApi = createApi({
-  reducerPath: "chatApi",
-  tagTypes: ["Channel", "Message"],
+  reducerPath: 'chatApi',
+  tagTypes: ['Channel', 'Message'],
   baseQuery: fetchBaseQuery({
-    baseUrl: "/api/v1",
+    baseUrl: '/api/v1',
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
     },
@@ -20,88 +20,88 @@ export const chatApi = createApi({
   endpoints: (builder) => ({
     addNewUser: builder.mutation({
       query: (newUser) => ({
-        url: "signup",
-        method: "POST",
+        url: 'signup',
+        method: 'POST',
         body: newUser,
       }),
     }),
     getChannels: builder.query({
-      query: () => "channels",
+      query: () => 'channels',
       onCacheEntryAdded: async (
         _,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) => {
         addSocketListener(
           socket,
-          "newChannel",
+          'newChannel',
           cacheDataLoaded,
           updateCachedData,
           cacheEntryRemoved,
         );
         addSocketListener(
           socket,
-          "renameChannel",
+          'renameChannel',
           cacheDataLoaded,
           updateCachedData,
           cacheEntryRemoved,
         );
         addSocketListener(
           socket,
-          "removeChannel",
+          'removeChannel',
           cacheDataLoaded,
           updateCachedData,
           cacheEntryRemoved,
         );
       },
-      providesTags: ["Channel"],
+      providesTags: ['Channel'],
     }),
     addChannel: builder.mutation({
       query: (channelName) => ({
-        url: "channels",
-        method: "POST",
+        url: 'channels',
+        method: 'POST',
         body: channelName,
       }),
     }),
     renameChannel: builder.mutation({
       query: ({ id, name }) => ({
         url: `channels/${id}`,
-        method: "PATCH",
+        method: 'PATCH',
         body: { name },
       }),
 
-      invalidatesTags: ["Channel", "Message"],
+      invalidatesTags: ['Channel', 'Message'],
     }),
     deleteChannel: builder.mutation({
       query: ({ id }) => ({
         url: `channels/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
       }),
-      invalidatesTags: ["Channel", "Message"],
+      invalidatesTags: ['Channel', 'Message'],
     }),
     getMessages: builder.query({
-      query: () => "messages",
+      query: () => 'messages',
       onCacheEntryAdded: async (
         _,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) => {
         addSocketListener(
           socket,
-          "newMessage",
+          'newMessage',
           cacheDataLoaded,
           updateCachedData,
           cacheEntryRemoved,
         );
       },
-      providesTags: ["Message", "Channel"],
+      providesTags: ['Message', 'Channel'],
     }),
     addMessage: builder.mutation({
       query: (newMessage) => ({
-        url: "messages",
-        method: "POST",
+        url: 'messages',
+        method: 'POST',
         body: newMessage,
       }),
 
-      invalidatesTags: ["Message"],
+      invalidatesTags: ['Message'],
     }),
   }),
 });

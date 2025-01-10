@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import {useEffect, useRef} from 'react';
 
-const MessagesBox = ({ channelMessages, filter }) => {
+const MessagesBox = ({channelMessages, filter}) => {
   const messagesRef = useRef(null);
 
   useEffect(() => {
@@ -13,10 +13,10 @@ const MessagesBox = ({ channelMessages, filter }) => {
       id="messages-box"
       className="chat-messages overflow-auto px-5"
     >
-      {channelMessages?.map(({ id, username, body }) => (
+      {channelMessages?.map(({id, username, body}) => (
         <div className="ext-break mb-2" key={id}>
-          <b>{ username}</b>
-          {": "}
+          <b>{username}</b>
+          {': '}
           <span>{filter.clean(body.body)}</span>
         </div>
       ))}

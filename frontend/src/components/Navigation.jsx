@@ -10,7 +10,7 @@ const Navigation = () => {
   return (
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
       <div className="container">
-        <span className="navbar-brand">{t("mainNavigation.title")}</span>
+        <span className="navbar-brand">{t('mainNavigation.title')}</span>
         {loggedIn && (
           <Link
             onClick={logOut}
@@ -18,9 +18,9 @@ const Navigation = () => {
             type="button"
             className="btn btn-primary"
           >
-            {t("mainNavigation.exitButton")}
+            {t('mainNavigation.exitButton')}
           </Link>
-          )}
+        )}
       </div>
     </nav>
   );

@@ -14,15 +14,15 @@ const LoginPage = () => {
           <div className="card shadow-sm">
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src={image} className="rounded-circle" alt={t("image.login")} width={200}/>
+                <img src={image} className="rounded-circle" alt={t('image.login')} width={200} />
               </div>
-             <LoginForm />
+              <LoginForm />
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>{t("loginPage.question")}</span>
+                <span>{t('loginPage.question')}</span>
                 <Link to={routes.signUpPagePath()}>
-                  {t("loginPage.registration")}
+                  {t('loginPage.registration')}
                 </Link>
               </div>
             </div>

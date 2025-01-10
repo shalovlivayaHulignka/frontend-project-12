@@ -9,12 +9,11 @@ import { signUpShema } from '../utils/validate';
 import routes from '../utils/routes';
 import useAuth from '../hooks/useAuth';
 
-
 const RegistrationForm = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(false);
 
   const inputRef = useRef(null);
   useEffect(() => {
@@ -22,23 +21,23 @@ const RegistrationForm = () => {
   }, []);
 
   const formik = useFormik({
-    initialValues: { username: "", password: "", confirmPassword: "" },
+    initialValues: { username: '', password: '', confirmPassword: '' },
     validationSchema: signUpShema(t),
     onSubmit: async (values) => {
       try {
         const res = await axios.post(routes.signUpApiPath(), values);
         auth.logIn(res.data.token, values.username);
         navigate(routes.mainPagePath());
-        setIsError(false)
+        setIsError(false);
       } catch (err) {
         formik.setSubmitting(false);
         if (err.isAxiosError && err.response.status === 401) {
           inputRef.current.select();
-          toast.error(t("toastify.error.authError"));
+          toast.error(t('toastify.error.authError'));
           return;
         } else if (err.response.status === 409) {
           inputRef.current.select();
-          setIsError(true)
+          setIsError(true);
         }
         throw err;
       }
@@ -57,13 +56,13 @@ const RegistrationForm = () => {
             placeholder="Ваш ник"
             id="username"
             ref={inputRef}
-            isInvalid={isError|| formik.touched.username && formik.errors.username}
+            isInvalid={isError || (formik.touched.username && formik.errors.username)}
             onChange={formik.handleChange}
             value={formik.values.username}
           />
-          <Form.Label htmlFor="username">{t("signupForm.username")}</Form.Label>
+          <Form.Label htmlFor="username">{t('signupForm.username')}</Form.Label>
           <Form.Control.Feedback type="invalid" tooltip>
-            {isError ? t("signupForm.errors.usernameExist") : formik.errors.username }
+            {isError ? t('signupForm.errors.usernameExist') : formik.errors.username }
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="form-floating mb-3">
@@ -71,14 +70,14 @@ const RegistrationForm = () => {
             name="password"
             autoComplete="current-password"
             required
-            placeholder={t("signupForm.password")}
+            placeholder={t('signupForm.password')}
             type="password"
             id="password"
             isInvalid={formik.touched.password && formik.errors.password}
             onChange={formik.handleChange}
             value={formik.values.password}
           />
-          <Form.Label htmlFor="password">{t("signupForm.password")}</Form.Label>
+          <Form.Label htmlFor="password">{t('signupForm.password')}</Form.Label>
           <Form.Control.Feedback type="invalid" tooltip>
             {formik.errors.password}
           </Form.Control.Feedback>
@@ -88,7 +87,7 @@ const RegistrationForm = () => {
             name="confirmPassword"
             autoComplete="new-password"
             required
-            placeholder={t("signupForm.confirmPassword")}
+            placeholder={t('signupForm.confirmPassword')}
             type="password"
             id="confirmPassword"
             onChange={formik.handleChange}
@@ -103,7 +102,7 @@ const RegistrationForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <Button type="submit" variant="outline-primary" className="w-100 mb-3">
-          {t("signupForm.submitButton")}
+          {t('signupForm.submitButton')}
         </Button>
       </fieldset>
     </Form>

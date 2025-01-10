@@ -19,13 +19,12 @@ const LoginForm = () => {
   }, []);
 
   const formik = useFormik({
-    initialValues: { username: "", password: "" },
+    initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       setAuthFailed(false);
 
       try {
         const res = await axios.post(routes.loginApiPath(), values);
-        console.log(res.data.token)
         auth.logIn(res.data.token, values.username);
         navigate(routes.mainPagePath());
       } catch (err) {
@@ -46,46 +45,46 @@ const LoginForm = () => {
       onSubmit={formik.handleSubmit}
     >
       <fieldset>
-        <h1 className="text-center mb-4">{t("loginForm.title")}</h1>
+        <h1 className="text-center mb-4">{t('loginForm.title')}</h1>
         <Form.Group className="form-floating mb-3">
           <Form.Control
             name="username"
             autoComplete="username"
             required
-            placeholder={t("loginForm.username")}
+            placeholder={t('loginForm.username')}
             id="username"
             ref={inputRef}
             isInvalid={authFailed}
             onChange={formik.handleChange}
             value={formik.values.username}
           />
-          <Form.Label htmlFor="username">{t("loginForm.username")}</Form.Label>
+          <Form.Label htmlFor="username">{t('loginForm.username')}</Form.Label>
         </Form.Group>
         <Form.Group className="form-floating mb-4">
           <Form.Control
             name="password"
             autoComplete="current-password"
             required
-            placeholder={t("loginForm.password")}
+            placeholder={t('loginForm.password')}
             type="password"
             id="password"
             isInvalid={authFailed}
             onChange={formik.handleChange}
             value={formik.values.password}
           />
-          <Form.Label htmlFor="password">{t("loginForm.password")}</Form.Label>
-          <Form.Control.Feedback type="invalid">{t("loginForm.feedback")}</Form.Control.Feedback>
+          <Form.Label htmlFor="password">{t('loginForm.password')}</Form.Label>
+          <Form.Control.Feedback type="invalid">{t('loginForm.feedback')}</Form.Control.Feedback>
         </Form.Group>
         <Button
           type="submit"
           variant="outline-primary"
           className="w-100 mb-3"
         >
-          {t("loginForm.submitButton")}
+          {t('loginForm.submitButton')}
         </Button>
       </fieldset>
     </Form>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

@@ -29,7 +29,7 @@ const RenameModal = ({ closeModal }) => {
       };
       try {
         await renameChannel(updatedChannel);
-        toast.success(t("toastify.success.channel.rename"));
+        toast.success(t('toastify.success.channel.rename'));
         closeModal();
       } catch (err) {
         console.log(err);
@@ -44,7 +44,7 @@ const RenameModal = ({ closeModal }) => {
   return (
     <Modal show="true" onHide={closeModal} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{t("modal.rename.title")}</Modal.Title>
+        <Modal.Title>{t('modal.rename.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -60,7 +60,7 @@ const RenameModal = ({ closeModal }) => {
               value={formik.values.name}
             />
             <Form.Label htmlFor="renameChannel" className="visually-hidden">
-              {t("modal.label")}
+              {t('modal.label')}
             </Form.Label>
             {formik.touched.name && formik.errors.name && (
               <Form.Control.Feedback type="invalid">
@@ -74,10 +74,10 @@ const RenameModal = ({ closeModal }) => {
                 className="me-2"
                 onClick={closeModal}
               >
-                {t("modal.rename.cancelButton")}
+                {t('modal.rename.cancelButton')}
               </Button>
               <Button variant="primary" type="submit">
-                {t("modal.rename.submitButton")}
+                {t('modal.rename.submitButton')}
               </Button>
             </div>
           </Form.Group>

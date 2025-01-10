@@ -7,7 +7,7 @@ const store = configureStore({
   reducer: {
     [chatApi.reducerPath]: chatApi.reducer,
     activeChannel: activeChannelReducer,
-    modal: modalReducer
+    modal: modalReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(chatApi.middleware),
 });

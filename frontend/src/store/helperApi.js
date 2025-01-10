@@ -11,18 +11,18 @@ const addSocketListener = async (
     const handleEvent = (payload) => {
       updateCachedData((draft) => {
         switch (event) {
-          case "newChannel":
-          case "newMessage":
+          case 'newChannel':
+          case 'newMessage':
             draft.push(payload);
             break;
-          case "renameChannel": {
+          case 'renameChannel': {
             const channel = draft.find((c) => c.id === payload.id);
             if (channel) {
               channel.name = payload.name;
             }
             break;
           }
-          case "removeChannel":
+          case 'removeChannel':
             return draft.filter((c) => c.id !== payload.id);
           default:
             break;

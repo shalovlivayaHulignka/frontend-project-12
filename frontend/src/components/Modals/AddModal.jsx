@@ -18,7 +18,7 @@ const AddModal = ({ closeModal }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      name: '',
     },
     validationSchema: channelNamesShema(channelNames, t),
     onSubmit: async ({ name }) => {
@@ -26,7 +26,7 @@ const AddModal = ({ closeModal }) => {
         const filteredName = filter.clean(name);
         const newChannel = await addChannel({ name: filteredName });
         dispatch(setActiveChannel(newChannel.data));
-        toast.success(t("toastify.success.channel.add"));
+        toast.success(t('toastify.success.channel.add'));
         closeModal();
       } catch (err) {
         console.log(err);
@@ -41,7 +41,7 @@ const AddModal = ({ closeModal }) => {
   return (
     <Modal show="true" onHide={closeModal} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{t("modal.add.title")}</Modal.Title>
+        <Modal.Title>{t('modal.add.title')}</Modal.Title>
       </Modal.Header>
       <Form onSubmit={formik.handleSubmit}>
         <Modal.Body>
@@ -57,7 +57,7 @@ const AddModal = ({ closeModal }) => {
               isInvalid={formik.touched.name && formik.errors.name}
             />
             <Form.Label htmlFor="addChannel" className="visually-hidden">
-              {t("modal.label")}
+              {t('modal.label')}
             </Form.Label>
             {formik.touched.name && formik.errors.name && (
               <Form.Control.Feedback type="invalid">
@@ -71,10 +71,10 @@ const AddModal = ({ closeModal }) => {
                 className="me-2"
                 onClick={closeModal}
               >
-                {t("modal.add.cancelButton")}
+                {t('modal.add.cancelButton')}
               </Button>
               <Button variant="primary" type="submit">
-                {t("modal.add.submitButton")}
+                {t('modal.add.submitButton')}
               </Button>
             </div>
           </Form.Group>
