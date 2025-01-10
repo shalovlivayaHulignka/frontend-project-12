@@ -14,7 +14,7 @@ const useLiveData = (channel) => {
     activeChannelId,
     activeChannelName,
     channels,
-    isLoading
+    isLoading,
   };
 };
 

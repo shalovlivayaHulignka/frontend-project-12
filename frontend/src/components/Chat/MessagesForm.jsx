@@ -3,7 +3,13 @@ import { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import MessageInputButton from './MessageInputButton';
 
-const MessagesForm = ({ channelId, addMessage, username, isLoading, t }) => {
+const MessagesForm = ({
+                        channelId,
+                        addMessage,
+                        username,
+                        isLoading,
+                        t,
+}) => {
   const inputRef = useRef(null);
 
   useEffect(() => {

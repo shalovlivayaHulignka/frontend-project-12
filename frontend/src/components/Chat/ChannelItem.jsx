@@ -1,11 +1,11 @@
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import filter from 'leo-profanity';
-import {setActiveChannel, activeChannelSelector} from '../../store/activeChannelSlice.jsx';
+import { setActiveChannel, activeChannelSelector } from '../../store/activeChannelSlice.jsx';
 import useLiveData from '../../hooks/useLiveData';
 
-const ChannelItem = ({channel}) => {
+const ChannelItem = ({ channel }) => {
   const activeChannel = useSelector(activeChannelSelector);
-  const {activeChannelId} = useLiveData(activeChannel);
+  const { activeChannelId } = useLiveData(activeChannel);
   const dispatch = useDispatch();
   const classes = channel.id === activeChannelId
     ? 'w-100 rounded-0 text-start text-truncate btn btn-secondary'

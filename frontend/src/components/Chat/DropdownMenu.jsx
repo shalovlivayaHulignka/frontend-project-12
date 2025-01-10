@@ -1,9 +1,9 @@
-import {useSelector} from 'react-redux';
-import {Dropdown, ButtonGroup} from 'react-bootstrap';
-import {activeChannelSelector} from '../../store/activeChannelSlice.jsx';
+import { useSelector } from 'react-redux';
+import { Dropdown, ButtonGroup } from 'react-bootstrap';
+import { activeChannelSelector } from '../../store/activeChannelSlice.jsx';
 import ChannelItem from './ChannelItem';
 
-const DropdownMenu = ({openModal, channel, t}) => {
+const DropdownMenu = ({ openModal, channel, t }) => {
   const activeChannel = useSelector(activeChannelSelector);
 
   return (
