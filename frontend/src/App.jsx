@@ -12,7 +12,6 @@ import AuthProvider from './authorization/AuthProvider';
 import Navigation from './components/Navigation';
 import store from './store/store';
 
-
 const App = () => (
   <div className="d-flex flex-column h-100">
     <BrowserRouter>
@@ -31,7 +30,7 @@ const App = () => (
       />
       <Provider store={store}>
         <AuthProvider>
-          <Navigation/>
+          <Navigation />
           <Routes>
             <Route path={routes.mainPagePath()} element={<HomePage />} />
             <Route path={routes.loginPagePath()} element={<LoginPage />} />

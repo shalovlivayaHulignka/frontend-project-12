@@ -4,11 +4,11 @@ import { useFormik } from 'formik';
 import MessageInputButton from './MessageInputButton';
 
 const MessagesForm = ({
-                        channelId,
-                        addMessage,
-                        username,
-                        isLoading,
-                        t,
+  channelId,
+  addMessage,
+  username,
+  isLoading,
+  t,
 }) => {
   const inputRef = useRef(null);
 

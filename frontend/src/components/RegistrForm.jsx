@@ -34,7 +34,6 @@ const RegistrationForm = () => {
         if (err.isAxiosError && err.response.status === 401) {
           inputRef.current.select();
           toast.error(t('toastify.error.authError'));
-          return;
         } else if (err.response.status === 409) {
           inputRef.current.select();
           setIsError(true);
