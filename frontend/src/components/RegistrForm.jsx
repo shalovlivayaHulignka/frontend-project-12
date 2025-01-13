@@ -52,7 +52,7 @@ const RegistrationForm = () => {
             name="username"
             autoComplete="username"
             required
-            placeholder="Ваш ник"
+            placeholder={t('signupForm.placeholder')}
             id="username"
             ref={inputRef}
             isInvalid={isError || (formik.touched.username && formik.errors.username)}

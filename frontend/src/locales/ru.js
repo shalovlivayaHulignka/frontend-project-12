@@ -18,6 +18,7 @@ const ru = {
     signupForm: {
       title: 'Регистрация',
       username: 'Имя пользователя',
+      placeholder: 'Ваш ник',
       password: 'Пароль',
       confirmPassword: 'Подтвердите пароль',
       submitButton: 'Зарегистрироваться',
