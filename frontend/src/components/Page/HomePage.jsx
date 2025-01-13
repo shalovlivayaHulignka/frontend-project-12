@@ -12,7 +12,7 @@ const HomePage = () => {
     if (!loggedIn) {
       navigate(routes.loginPagePath());
     }
-  },[loggedIn, navigate]);
+  }, [loggedIn, navigate]);
 
   return (
     <ContainerChat />

@@ -42,7 +42,6 @@ const MessagesForm = ({
   return (
     <Form
       onSubmit={formik.handleSubmit}
-      noValidate
       className="py-1 border rounded-2"
     >
       <div className="input-group has-validation">
