@@ -2,7 +2,7 @@ import { useGetChannelsQuery } from '../store/chatApi';
 import defaultChannel from '../utils/defaultChannel';
 
 const useLiveData = (channel) => {
-  const { data: channels, isLoading } = useGetChannelsQuery();
+  const { data: channels, isLoading, error } = useGetChannelsQuery();
   if (isLoading) {
     return { activeChannelId: null, activeChannelName: 'Loading...' };
   }
@@ -15,6 +15,7 @@ const useLiveData = (channel) => {
     activeChannelName,
     channels,
     isLoading,
+    error,
   };
 };
 

@@ -10,6 +10,8 @@ import { activeChannelSelector } from '../../store/activeChannelSlice.jsx';
 import getModal from '../Modals';
 import ChannelTitle from './ChannelTitle';
 import defaultChannel from '../../utils/defaultChannel.js';
+import routes from '../../utils/routes.jsx';
+import {useNavigate} from "react-router-dom";
 
 const renderModal = (type, close, channel) => {
   if (!type) {
@@ -24,13 +26,18 @@ const ChannelsList = () => {
   const { t } = useTranslation();
   const modalType = useSelector((state) => state.modal.modalType);
   const activeChannel = useSelector(activeChannelSelector);
-  const { activeChannelId, channels, isLoading } = useLiveData(activeChannel);
+  const { activeChannelId, channels, isLoading, error } = useLiveData(activeChannel);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOpenModal = (type, channel) => dispatch(openModal({ type, channel }));
   const handleCloseModal = () => dispatch(closeModal());
   const isEditableChannel = (channel) => channel.removable;
   const channelsListRef = useRef(null);
+
+  if (error && error.status === 401) {
+    navigate(routes.loginPagePath());
+  }
 
   useEffect(() => {
     if (activeChannelId === defaultChannel.id) {
@@ -51,7 +58,7 @@ const ChannelsList = () => {
         id="channels-box"
         className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block"
       >
-        {isLoading && <Loading t={t} />}
+        {/*{isLoading && <Loading t={t} />}*/}
         {channels?.map((channel) => (
           <li className="nav-item w-100" key={channel.id}>
             {isEditableChannel(channel) ? (
