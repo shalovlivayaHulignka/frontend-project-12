@@ -1,7 +1,12 @@
 import { Form } from 'react-bootstrap';
 import { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 import MessageInputButton from './MessageInputButton';
+
+const schema = yup.object().shape({
+  body: yup.string().trim().required(),
+});
 
 const MessagesForm = ({
   channelId,
@@ -19,6 +24,9 @@ const MessagesForm = ({
   const formik = useFormik({
     initialValues: {
       body: '',
+      validationSchema: schema,
+      validateOnBlur: false,
+      validateOnMount: true,
     },
     onSubmit: async (body, { setFieldValue }) => {
       try {
