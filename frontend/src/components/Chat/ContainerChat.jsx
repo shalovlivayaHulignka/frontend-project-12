@@ -12,8 +12,8 @@ const Content = () => {
 
   return (
     <>
-      <ChannelsList/>
-      <MessagesContainer/>
+      <ChannelsList />
+      <MessagesContainer />
     </>
   );
 };
