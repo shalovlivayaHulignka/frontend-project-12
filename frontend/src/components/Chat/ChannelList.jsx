@@ -9,8 +9,6 @@ import { activeChannelSelector } from '../../store/activeChannelSlice.jsx';
 import getModal from '../Modals';
 import ChannelTitle from './ChannelTitle';
 import defaultChannel from '../../utils/defaultChannel.js';
-import routes from '../../utils/routes.jsx';
-import { useNavigate } from 'react-router-dom';
 
 const renderModal = (type, close, channel) => {
   if (!type) {
@@ -25,9 +23,8 @@ const ChannelsList = () => {
   const { t } = useTranslation();
   const modalType = useSelector((state) => state.modal.modalType);
   const activeChannel = useSelector(activeChannelSelector);
-  const { activeChannelId, channels, isLoading, error } = useLiveData(activeChannel);
+  const { activeChannelId, channels, isLoading } = useLiveData(activeChannel);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleOpenModal = (type, channel) => dispatch(openModal({ type, channel }));
   const handleCloseModal = () => dispatch(closeModal());
@@ -35,10 +32,6 @@ const ChannelsList = () => {
   const channelsListRef = useRef(null);
 
   useEffect(() => {
-    if (error && error.status === 401) {
-      navigate(routes.loginPagePath());
-    }
-
     if (activeChannelId === defaultChannel.id) {
       channelsListRef.current.scrollTop = 0;
     } else {

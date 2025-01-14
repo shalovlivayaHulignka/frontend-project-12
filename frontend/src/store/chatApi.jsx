@@ -27,6 +27,13 @@ export const chatApi = createApi({
     }),
     getChannels: builder.query({
       query: () => 'channels',
+      onQueryStarted: async (args, { queryFulfilled }) => {
+        queryFulfilled.catch((err) => {
+          if (err.error?.status === 401) {
+            window.location.href = '/login';
+          }
+        });
+      },
       onCacheEntryAdded: async (
         _,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
