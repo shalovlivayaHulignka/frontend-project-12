@@ -34,11 +34,11 @@ const ChannelsList = () => {
   const isEditableChannel = (channel) => channel.removable;
   const channelsListRef = useRef(null);
 
-  if (error && error.status === 401) {
-    navigate(routes.loginPagePath());
-  }
-
   useEffect(() => {
+    if (error && error.status === 401) {
+      navigate(routes.loginPagePath());
+    }
+
     if (activeChannelId === defaultChannel.id) {
       channelsListRef.current.scrollTop = 0;
     } else {
