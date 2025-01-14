@@ -6,17 +6,16 @@ import Loading from '../Loading.jsx';
 const Content = () => {
   const { isLoading } = useGetChannelsQuery();
 
-  switch (isLoading) {
-    case isLoading === true:
-      return <Loading/>;
-    default:
-      return (
-        <>
-          <ChannelsList/>
-          <MessagesContainer/>
-        </>
-      );
+  if (isLoading === true) {
+    return <Loading />;
   }
+
+  return (
+    <>
+      <ChannelsList/>
+      <MessagesContainer/>
+    </>
+  );
 };
 
 const ContainerChat = () => (
