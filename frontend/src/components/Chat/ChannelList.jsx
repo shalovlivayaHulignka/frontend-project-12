@@ -23,7 +23,7 @@ const ChannelsList = () => {
   const { t } = useTranslation();
   const modalType = useSelector((state) => state.modal.modalType);
   const activeChannel = useSelector(activeChannelSelector);
-  const { activeChannelId, channels, isLoading } = useLiveData(activeChannel);
+  const { activeChannelId, channels } = useLiveData(activeChannel);
   const dispatch = useDispatch();
 
   const handleOpenModal = (type, channel) => dispatch(openModal({ type, channel }));

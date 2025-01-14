@@ -1,20 +1,21 @@
 import ChannelsList from './ChannelList';
 import MessagesContainer from './MessagesContainer';
 import { useGetChannelsQuery } from '../../store/chatApi.jsx';
-import Loading from "../Loading.jsx";
+import Loading from '../Loading.jsx';
 
 const Content = () => {
   const { isLoading } = useGetChannelsQuery();
 
-  if(isLoading === true) {
-    return <Loading />
-  } else {
-    return(
-      <>
-        <ChannelsList />
-        <MessagesContainer />
-      </>
-    )
+  switch (isLoading) {
+    case isLoading === true:
+      return <Loading/>;
+    default:
+      return (
+        <>
+          <ChannelsList/>
+          <MessagesContainer/>
+        </>
+      );
   }
 };
 
